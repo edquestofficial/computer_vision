@@ -1,36 +1,22 @@
 # computer_vision
 computer vision related use cases
 
-# YOLOv8 Real-Time Person Counter
+# 🚗 Vehicle Entry Counter using YOLOv8 & OpenCV
 
-A Python project using **YOLOv8** and **OpenCV** to detect and count people crossing a virtual line in real-time via webcam.
-
----
-
-## 📝 Overview
-
-This project captures video from a camera, detects people using the YOLOv8 object detection model, and counts the number of people crossing a horizontal line. It draws bounding boxes around detected persons and displays their centroids. The total count is shown on the video feed.
+This project uses **[Ultralytics YOLOv8](https://github.com/ultralytics/ultralytics)** and **OpenCV** to detect and count vehicles crossing a designated line in a video.  
+It tracks vehicles (car, motorbike, bus, truck) and increments the count when they cross the **entry line**.
 
 ---
 
-## ⚙️ Features
+## 🧠 Features
 
-- Real-time person detection with **YOLOv8**.
-- Person counting when crossing a horizontal line.
-- Bounding boxes and centroids drawn on detected persons.
-- Simple visualization of count on video feed.
-- Works with webcam or video input.
+- ✅ Real-time vehicle detection and tracking using YOLOv8  
+- ✅ Counts vehicles **crossing the entry line** (downward direction)  
+- ✅ Supports multiple vehicle types: **car, motorbike, bus, truck**  
+- ✅ Uses **persistent object IDs** to avoid double counting  
+- ✅ Displays live video with bounding boxes, IDs, and total count
 
 ---
 
-## 📦 Requirements
+## 📂 Project Structure
 
-- Python 3.8+
-- [Ultralytics YOLOv8](https://pypi.org/project/ultralytics/)
-- OpenCV
-- NumPy
-
-Install dependencies with:
-
-```bash
-pip install ultralytics opencv-python numpy
