@@ -1,0 +1,6 @@
+train: D:/Trolly/data_set/train/images
+val: D:/Trolly/data_set/val/images
+test: D:/Trolly/data_set/test/images  # optional
+
+nc: 1   # number of classes
+names: ['wheel']   # replace with your class name(s)
