@@ -1,0 +1,13 @@
+
+---
+
+## 🛠️ Requirements
+
+- Python 3.8 or above
+- [Ultralytics YOLO](https://docs.ultralytics.com/)
+- OpenCV
+
+Install the required packages:
+
+```bash
+pip install ultralytics opencv-python

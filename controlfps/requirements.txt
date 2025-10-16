@@ -1,0 +1,6 @@
+ultralytics==8.0.149          # YOLOv8
+deep_sort_realtime==1.7.6     # DeepSORT tracker
+numpy>=1.24,<2.0              # For compatibility with facenet or other libraries
+opencv-python>=4.7.0          # OpenCV for video handling and drawing
+scipy>=1.10.1                 # For cosine distance
+torch>=2.1.0                  # PyTorch backend for YOLOv8
