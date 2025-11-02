@@ -2,9 +2,14 @@
 __pycache__/
 *.py[codz]
 *$py.class
+*.venv*
+*.lock*
 
 # C extensions
 *.so
+
+# Images
+*.jpg
 
 # Distribution / packaging
 .Python
