@@ -9,6 +9,8 @@ import shutil
 from fastapi.responses import JSONResponse
 from typing import List
 import requests
+from util.mailer import send_mail
+
 router = APIRouter()
 
 from .vector_store import process_registration_object, create_embedding_for_file
@@ -22,8 +24,8 @@ async def companyadmin_login(username: str, password: str):
         connection = get_connection()
 
         cursor = connection.cursor(dictionary=True)
-        cursor.execute("SELECT * FROM company_admin WHERE username = %s AND password = %s", (username, password))
-        result = cursor.fetchall()
+        cursor.execute("SELECT username, role,company_id,active FROM ed_employees WHERE username = %s AND password = %s", (username, password))
+        result = cursor.fetchone()
         
         cursor.close()
         connection.close()
@@ -105,7 +107,11 @@ async def add_employee(
         """
         cursor.execute(insert_query, (company_id, name, photo_data, username, password, role, created_by))
         connection.commit()
-
+        send  = send_mail(username,password, role)
+        if send :
+            print("mail send to HR.")
+        else:
+            print("Mail not send.")
         print("Employee inserted successfully in DB.")
 
         # Call face embedding function in a background thread (non-blocking)
