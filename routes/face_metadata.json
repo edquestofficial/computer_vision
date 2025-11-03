@@ -1,0 +1,86 @@
+[
+  {
+    "faiss_id": 0,
+    "username": "Harsh7777",
+    "name": "Harshdeep",
+    "image_index": 0,
+    "timestamp": "2025-11-02T18:03:10.752275"
+  },
+  {
+    "faiss_id": 1,
+    "username": "Harsh7777",
+    "name": "Harshdeep",
+    "image_index": 1,
+    "timestamp": "2025-11-02T18:03:11.105891"
+  },
+  {
+    "faiss_id": 2,
+    "username": "Harsh7777",
+    "name": "Harshdeep",
+    "image_index": 2,
+    "timestamp": "2025-11-02T18:03:11.721611"
+  },
+  {
+    "faiss_id": 3,
+    "username": "Harsh7777",
+    "name": "Harshdeep",
+    "image_index": 3,
+    "timestamp": "2025-11-02T18:03:12.265409"
+  },
+  {
+    "faiss_id": 4,
+    "username": "ayush1234",
+    "name": "Ayush Dixit",
+    "image_index": 0,
+    "timestamp": "2025-11-02T18:22:26.928217"
+  },
+  {
+    "faiss_id": 5,
+    "username": "ayush1234",
+    "name": "Ayush Dixit",
+    "image_index": 1,
+    "timestamp": "2025-11-02T18:22:27.643409"
+  },
+  {
+    "faiss_id": 6,
+    "username": "ayush1234",
+    "name": "Ayush Dixit",
+    "image_index": 2,
+    "timestamp": "2025-11-02T18:22:28.293266"
+  },
+  {
+    "faiss_id": 7,
+    "username": "ayush1234",
+    "name": "Ayush Dixit",
+    "image_index": 3,
+    "timestamp": "2025-11-02T18:22:28.860279"
+  },
+  {
+    "faiss_id": 8,
+    "username": "Raman123",
+    "name": "Raman",
+    "image_index": 0,
+    "timestamp": "2025-11-03T04:05:07.890535"
+  },
+  {
+    "faiss_id": 9,
+    "username": "Raman123",
+    "name": "Raman",
+    "image_index": 1,
+    "timestamp": "2025-11-03T04:05:08.724838"
+  },
+  {
+    "faiss_id": 10,
+    "username": "Raman123",
+    "name": "Raman",
+    "image_index": 2,
+    "timestamp": "2025-11-03T04:05:09.497507"
+  },
+  {
+    "faiss_id": 11,
+    "username": "Raman123",
+    "name": "Raman",
+    "image_index": 3,
+    "timestamp": "2025-11-03T04:05:10.332138"
+  }
+]
