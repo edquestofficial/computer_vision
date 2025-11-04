@@ -4,6 +4,7 @@ import io
 import numpy as np
 import asyncio
 from fastapi import APIRouter,File, UploadFile,Form
+import  base64
 # from conn import mydb, cursor
 # from util.face_match import face_encoding,incert
 from db_config import get_connection
@@ -12,8 +13,11 @@ import os
 import shutil
 import pandas as pd
 from fastapi.responses import JSONResponse
+from fastapi.encoders import jsonable_encoder
 from typing import List
 import requests
+from util.mailer import send_mail
+
 router = APIRouter()
 
 from .vector_store import process_registration_object, create_embedding_for_file
@@ -27,19 +31,49 @@ async def companyadmin_login(username: str, password: str):
         connection = get_connection()
 
         cursor = connection.cursor(dictionary=True)
-        cursor.execute("SELECT * FROM company_admin WHERE username = %s AND password = %s", (username, password))
-        result = cursor.fetchall()
-        
+        cursor.execute("SELECT username, role,company_id,active FROM ed_employees WHERE username = %s AND password = %s", (username, password))
+        result = cursor.fetchone()
+        cursor.execute("SELECT alias_name FROM company_details WHERE id = %s",(result["company_id"],))
+        name = cursor.fetchone()
+
         cursor.close()
         connection.close()
         if not result:
             return {"message": "Invalid credentials"}
         return {"message": "Company Admin Login Successful",
-                "data":result}
+                "data":result,
+                "alias_name":name["alias_name"]}
     except Exception as e:
         return {"error": str(e)}
     
+@router.get("/employees")
+async def get_employees(username:str,alias_name:str):
+    connection = get_connection()
+    cursor = connection.cursor(dictionary=True ,buffered=True)
 
+
+    query = f"""SELECT * FROM  {alias_name}_employees WHERE active = 1"""
+    cursor.execute(query)
+    result = cursor.fetchall()
+    cursor.close()
+    connection.close()
+    details = []
+    for data in result:
+        data["photo"] = ""
+    return result
+
+@router.post("/update_employee")
+async def update_employee(name:str,username:str,role:str,id:int,alias_name:str,updated_by:str):
+    query = f"UPDATE {alias_name}_employees SET name = %s,username=%s , role = %s , modified_by = %s,modified_at= CURRENT_TIMESTAMP() WHERE id = %s "
+    connection = get_connection()
+    cursor = connection.cursor(dictionary=True ,buffered=True)
+    try:
+        cursor.execute(query,(name,username,role,updated_by,id ))
+        cursor.close()
+        connection.close()
+        return {"message":"updated"}
+    except Exception as e :
+        return {"error":str(e)}
 
 @router.post("/employee")
 async def add_employee(
@@ -110,7 +144,11 @@ async def add_employee(
         """
         cursor.execute(insert_query, (company_id, name, photo_data, username, password, role, created_by))
         connection.commit()
-
+        send  = send_mail(username,password, role)
+        if send :
+            print("mail send to HR.")
+        else:
+            print("Mail not send.")
         print("Employee inserted successfully in DB.")
 
         # Call face embedding function in a background thread (non-blocking)
@@ -142,6 +180,14 @@ async def add_employee(
             content={"error": str(e)}
         )
 
+@router.get("/role")
+async def get_role():
+    connection = get_connection()
+    cursor = connection.cursor(dictionary=True ,buffered=True)
+    query = f"""SELECT * FROM  roles"""
+    cursor.execute(query)
+    result = cursor.fetchall()
+    return result
 
 @router.delete("/employee")
 async def delete_employee(Company_alias: str, username: str):
@@ -182,7 +228,6 @@ EXPECTED_HEADERS = [
 #     create_table_query = f"""
 #     CREATE TABLE IF NOT EXISTS `{table_name}` (
 #         `id` INT AUTO_INCREMENT PRIMARY KEY,
-#         `s no.` VARCHAR(50),
 #         `date` DATETIME,
 #         `name` VARCHAR(255),
 #         `company name` VARCHAR(255),

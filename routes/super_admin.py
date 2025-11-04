@@ -50,7 +50,7 @@ async def add_company(
     try:
         connection = get_connection()
         cursor = connection.cursor(dictionary=True)
-        query = " CREATE TABLE IF NOT EXISTS `{}_employees` (id INT AUTO_INCREMENT PRIMARY KEY, company_id INT, name VARCHAR(50),photo LONGBLOB ,username VARCHAR(255), password VARCHAR(255), role VARCHAR(50), created_by VARCHAR(50), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, modified_by VARCHAR(50), modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, active BOOLEAN DEFAULT TRUE)".format(alias_name)
+        query = " CREATE TABLE IF NOT EXISTS `{}_employees` (id INT AUTO_INCREMENT PRIMARY KEY, company_id INT, name VARCHAR(50),photo LONGBLOB ,username VARCHAR(255) UNIQUE, password VARCHAR(255), role VARCHAR(50), created_by VARCHAR(50), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, modified_by VARCHAR(50), modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, active BOOLEAN DEFAULT TRUE)".format(alias_name)
         cursor.execute(query)
         connection.commit()
         return {"message": "Company added successfully"}
