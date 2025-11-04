@@ -4,9 +4,9 @@ from mysql.connector import Error
 def get_connection():
     try:
         connection = mysql.connector.connect(
-            host="localhost",          # your MySQL host
-            user="root",               # your MySQL username
-            password="Passw0rd",    # your MySQL password
+            host="192.168.1.20",          # your MySQL host
+            user="test",               # your MySQL username
+            password="test",    # your MySQL password
             database="Edquestdb"          # your database name
         )
         return connection
