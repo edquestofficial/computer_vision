@@ -32,4 +32,3 @@ def send_mail(username:str,password:str,role:str):
     except Exception as e:
         print (e)
         return False
-send_mail("test","test","test")
